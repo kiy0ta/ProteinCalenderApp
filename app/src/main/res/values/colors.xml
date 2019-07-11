@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorTotalization">#FF95C6D1</color>
+    <color name="colorTotalContents">#FFECF2F4</color>
+    <color name="colorCalenderSunday">#ef5b68</color>
+    <color name="colorCalenderSaturday">#5ba3ef</color>
+    <color name="colorCalenderWorkday">#ffffff</color>
+    <color name="colorCalenderWorkdayBack">#efcf5b</color>
+    <color name="colorCalendarBorder">#3e3e3e</color>
+    <color name="color_white">#ffffff</color>
+
+
+</resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ProteinCalenderApp</string>
+    <string name="total_on_month">今月の合計</string>
+    <string name="look_total">グラフ集計</string>
+    <string name="calendar_sunday">SUN</string>
+    <string name="calender_monday">MON</string>
+    <string name="calender_tuesday">TUE</string>
+    <string name="calender_wednesday">WED</string>
+    <string name="calender_thursday">THU</string>
+    <string name="calender_friday">FRI</string>
+    <string name="calender_saturday">SAT</string>
+
+</resources>

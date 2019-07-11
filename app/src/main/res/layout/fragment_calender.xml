@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderSunday"
+            android:text="@string/calendar_sunday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderWorkdayBack"
+            android:text="@string/calender_monday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderWorkdayBack"
+            android:text="@string/calender_tuesday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderWorkdayBack"
+            android:text="@string/calender_wednesday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderWorkdayBack"
+            android:text="@string/calender_thursday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderWorkdayBack"
+            android:text="@string/calender_friday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorCalenderSaturday"
+            android:text="@string/calender_saturday"
+            android:textAlignment="center"
+            android:textColor="@color/colorCalenderWorkday" />
+
+    </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="7" />
+
+</LinearLayout>
