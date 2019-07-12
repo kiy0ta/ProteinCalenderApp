@@ -15,8 +15,8 @@
 
         <LinearLayout
             android:id="@+id/today_bg"
-            android:layout_width="23dp"
-            android:layout_height="50dp"
+            android:layout_width="22dp"
+            android:layout_height="16dp"
             android:gravity="center">
 
             <TextView
@@ -24,20 +24,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="test"/>
+                />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="22dp"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/training_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_cocoa"/>
+                android:id="@+id/protein_icon"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                />
         </RelativeLayout>
 
     </RelativeLayout>

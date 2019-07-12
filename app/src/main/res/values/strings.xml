@@ -9,5 +9,8 @@
     <string name="calender_thursday">THU</string>
     <string name="calender_friday">FRI</string>
     <string name="calender_saturday">SAT</string>
+    <string name="calender_last_month">前月</string>
+    <string name="calender_next_month">次月</string>
+    <string name="calender_select_protein_type">プロテインの種類を選択する</string>
 
 </resources>

@@ -11,6 +11,12 @@
     <color name="colorCalenderWorkdayBack">#efcf5b</color>
     <color name="colorCalendarBorder">#3e3e3e</color>
     <color name="color_white">#ffffff</color>
+    <color name="color_black">#000000</color>
+    <color name="colorCalenderSelectMonth">#686464</color>
+    <color name="colorCalenderTodayBG">#89a7d679</color>
+    <color name="color_calendar_not_current_month_date">#9a9a9a</color>
+
+    <!--<color name="colorCalenderSelectMonth">#6a7173</color>-->
 
 
 </resources>
