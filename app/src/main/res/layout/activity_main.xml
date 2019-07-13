@@ -52,13 +52,13 @@
 
                     <!--「合計金額」の文字列-->
                     <TextView
+                        android:id="@+id/total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="7dp"
-                        android:text="10000円"
                         android:textAlignment="center"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
                     <!--「合計本数」の画像-->
                     <ImageView
@@ -69,13 +69,13 @@
 
                     <!--「合計本数」の文字列-->
                     <TextView
+                        android:id="@+id/total_bottle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="7dp"
-                        android:text="20本"
                         android:textAlignment="center"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
                     <!--「合計タンパク質」の画像-->
                     <ImageView
@@ -86,13 +86,13 @@
 
                     <!--「合計タンパク質」の文字列-->
                     <TextView
+                        android:id="@+id/total_protein"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="7dp"
-                        android:text="300g"
                         android:textAlignment="center"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
                 </LinearLayout>
 
@@ -117,7 +117,7 @@
 
                     <!--「左矢印」の画像-->
                     <ImageView
-                        android:id="@+id/calender_last_month"
+                        android:id="@+id/calendar_last_month"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_marginRight="4dp"
@@ -256,8 +256,11 @@
                     android:orientation="horizontal"
                     android:paddingTop="36dp">
 
+                    <!--TODO "calendarのタイポを修正する"-->
+
                     <!--「ココア」の画像-->
                     <ImageView
+                        android:id="@+id/calendar_protein_type_cocoa"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_marginRight="12dp"
@@ -265,6 +268,7 @@
 
                     <!--「レモン」の画像-->
                     <ImageView
+                        android:id="@+id/calendar_protein_type_lemon"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_marginRight="12dp"
@@ -272,6 +276,7 @@
 
                     <!--「ノーマル」の画像-->
                     <ImageView
+                        android:id="@+id/calendar_protein_type_noemal"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_marginRight="12dp"
@@ -279,6 +284,7 @@
 
                     <!--「ヨーグルト」の画像-->
                     <ImageView
+                        android:id="@+id/calendar_protein_type_yogurt"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:src="@drawable/ic_type_yogurt" />

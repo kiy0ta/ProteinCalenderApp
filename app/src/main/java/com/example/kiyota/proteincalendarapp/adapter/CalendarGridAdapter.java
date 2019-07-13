@@ -102,6 +102,7 @@ public class CalendarGridAdapter extends BaseAdapter {
                     colorId = R.color.colorCalenderSaturday;
                     break;
                 default:
+                    //TODO "文字色をグレーに修正する(かも)"
                     colorId = R.color.color_black;
                     break;
             }
