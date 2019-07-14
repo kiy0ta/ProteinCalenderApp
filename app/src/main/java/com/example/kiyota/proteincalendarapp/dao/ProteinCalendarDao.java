@@ -30,7 +30,7 @@ public class ProteinCalendarDao {
 
     //プロテイン画像を押下したら、日付とタイプを登録する
 //    public void registProteinAllInfo(Date date,int type){
-    public void registProteinAllInfo(String date, int type) {
+    public void registProteinAllInfo(String date, String type) {
 
         ContentValues values = new ContentValues();
         values.put(ProteinCalendarContract.Input.RECORD_DATE, date);
@@ -38,8 +38,7 @@ public class ProteinCalendarDao {
         values.put(ProteinCalendarContract.Input.RECORD_PRICE, DefaultData.defaultPrice);
         values.put(ProteinCalendarContract.Input.RECORD_BOTTLE, DefaultData.defaultBottle);
         values.put(ProteinCalendarContract.Input.RECORD_PROTEIN, DefaultData.defaultProtein);
-        mContext.getContentResolver().insert(ProteinCalendarContract.Input.CONTENT_URI,
-                values);
+        mContext.getContentResolver().insert(ProteinCalendarContract.Input.CONTENT_URI,values);
     }
 
     //DBの中のデータ数をカウントする処理
@@ -67,6 +66,7 @@ public class ProteinCalendarDao {
     public List<ProteinEntity> selectAll() throws ParseException {
         List<ProteinEntity> list = new ArrayList<ProteinEntity>();
         String[] projection = new String[]{
+                ProteinCalendarContract.Input._ID,
                 ProteinCalendarContract.Input.RECORD_DATE,
                 ProteinCalendarContract.Input.RECORD_TYPE,
                 ProteinCalendarContract.Input.RECORD_PRICE,
@@ -80,16 +80,17 @@ public class ProteinCalendarDao {
             if (cur != null && cur.getCount() > 0) {
                 while (cur.moveToNext()) {
                     ProteinEntity entity = new ProteinEntity();
-                    entity.setDrinkingDayString(cur.getString(0));
+                    entity.setId(cur.getInt(0));
+                    entity.setDrinkingDayString(cur.getString(1));
                     //Stringで取得した「日付」をDateに変換して、Dateの「日付」にsetする
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                     // Date型変換
                     Date formatDate = sdf.parse(entity.getDrinkingDayString());
                     entity.setDrinkingDay(formatDate);
-                    entity.setProteinType(cur.getInt(1));
-                    entity.setPrice(cur.getInt(2));
-                    entity.setBottle(cur.getInt(3));
-                    entity.setProtein(cur.getInt(4));
+                    entity.setProteinType(cur.getInt(2));
+                    entity.setPrice(cur.getInt(3));
+                    entity.setBottle(cur.getInt(4));
+                    entity.setProtein(cur.getInt(5));
                     list.add(entity);
                 }
                 return list;

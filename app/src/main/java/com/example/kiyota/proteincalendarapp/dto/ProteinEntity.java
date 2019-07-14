@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class ProteinEntity {
 
+    //ID
+    private int id;
     //プロテインを飲んだ日付
     private Date drinkingDay;
     //プロテインを飲んだ日付(String)
@@ -21,8 +23,10 @@ public class ProteinEntity {
     //飲んだプロテインに含まれるタンパク質の量
     private int protein;
 
-    public ProteinEntity(Date drinkingDay, int proteinType, int price, int bottle, int protein) {
+    public ProteinEntity(int id, Date drinkingDay, String drinkingDayString, int proteinType, int price, int bottle, int protein) {
+        this.id = id;
         this.drinkingDay = drinkingDay;
+        this.drinkingDayString = drinkingDayString;
         this.proteinType = proteinType;
         this.price = price;
         this.bottle = bottle;
@@ -30,7 +34,14 @@ public class ProteinEntity {
     }
 
     public ProteinEntity() {
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getDrinkingDay() {
@@ -41,8 +52,15 @@ public class ProteinEntity {
         this.drinkingDay = drinkingDay;
     }
 
-    public int getProteinType() {
+    public String getDrinkingDayString() {
+        return drinkingDayString;
+    }
 
+    public void setDrinkingDayString(String drinkingDayString) {
+        this.drinkingDayString = drinkingDayString;
+    }
+
+    public int getProteinType() {
         return proteinType;
     }
 
@@ -72,13 +90,5 @@ public class ProteinEntity {
 
     public void setProtein(int protein) {
         this.protein = protein;
-    }
-
-    public String getDrinkingDayString() {
-        return drinkingDayString;
-    }
-
-    public void setDrinkingDayString(String drinkingDayString) {
-        this.drinkingDayString = drinkingDayString;
     }
 }

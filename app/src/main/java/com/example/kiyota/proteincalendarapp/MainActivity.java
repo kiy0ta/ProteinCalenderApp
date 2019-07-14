@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.kiyota.proteincalendarapp.activity.TotalizationActivity;
 import com.example.kiyota.proteincalendarapp.constants.DefaultData;
+import com.example.kiyota.proteincalendarapp.constants.ProteinType;
 import com.example.kiyota.proteincalendarapp.dao.ProteinCalendarDao;
 import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
 import com.example.kiyota.proteincalenderapp.R;
@@ -27,12 +28,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     CalendarGridAdapter cg;
-    Context mContext;
     Calendar mCalendar;
     TextView mTextViewForPrice;
     TextView mTextViewForBottle;
     TextView mTextViewForProtein;
-    ProteinCalendarDao mDao = new ProteinCalendarDao(mContext);
+    ProteinCalendarDao mDao;
     List<ProteinEntity> mEntityList = new ArrayList<ProteinEntity>();
     ImageView mImageViewCocoa;
     ImageView mImageViewLemon;
@@ -44,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         //メイン画面をセットする処理
         setContentView(R.layout.activity_main);
+        mDao = new ProteinCalendarDao(this);
 
         //「合計金額」の文字列を表示する処理
         mTextViewForPrice = findViewById(R.id.total_price);
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mTextViewForBottle = findViewById(R.id.total_bottle);
         //「合計タンパク質」の文字列を表示する処理
         mTextViewForProtein = findViewById(R.id.total_protein);
+
 
         //DBのデータ数を取得する処理
         int count = mDao.getDataCount();
@@ -130,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         //Date型に変換する
                         //SimpleDateFormat dateFormat = new SimpleDateFormat(CALENDAR_FORMAT);
                         //String dateToString = (dateFormat.format(date));
-                        mDao.registProteinAllInfo(day, 0);
+                        mDao.registProteinAllInfo(day, ProteinType.stCOCOA);
                         mProteinIcon.findViewById(R.id.protein_icon);
                         mProteinIcon.setImageResource(R.drawable.ic_cocoa);
                     }
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         //Date型に変換する
                         //SimpleDateFormat dateFormat = new SimpleDateFormat(CALENDAR_FORMAT);
                         //String dateToString = (dateFormat.format(date));
-                        mDao.registProteinAllInfo(day, 1);
+                        mDao.registProteinAllInfo(day, ProteinType.stLEMON);
                         mProteinIcon.findViewById(R.id.protein_icon);
                         mProteinIcon.setImageResource(R.drawable.ic_lemon);
                     }
@@ -168,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                         //Date型に変換する
                         //SimpleDateFormat dateFormat = new SimpleDateFormat(CALENDAR_FORMAT);
                         //String dateToString = (dateFormat.format(date));
-                        mDao.registProteinAllInfo(day, 2);
+                        mDao.registProteinAllInfo(day, ProteinType.stNORMAL);
                         mProteinIcon.findViewById(R.id.protein_icon);
                         mProteinIcon.setImageResource(R.drawable.ic_nomal);
                     }
@@ -187,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         //Date型に変換する
                         //SimpleDateFormat dateFormat = new SimpleDateFormat(CALENDAR_FORMAT);
                         //String dateToString = (dateFormat.format(date));
-                        mDao.registProteinAllInfo(day, 2);
+                        mDao.registProteinAllInfo(day, ProteinType.stYOGURT);
                         mProteinIcon.findViewById(R.id.protein_icon);
                         mProteinIcon.setImageResource(R.drawable.ic_yogurt);
                     }

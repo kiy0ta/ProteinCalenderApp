@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.kiyota.proteincalendarapp.constants.ProteinType;
@@ -116,7 +117,7 @@ public class CalendarGridAdapter extends BaseAdapter {
 
         //当月かつ、当日の場合は日付の背景色を透過きみどり色に変更する
         if (isCurrentMonth(position) && DateUtil.isSameDate(getDate(position), new Date())) {
-            LinearLayout todayBackGround = convertView.findViewById(R.id.today_bg);
+            RelativeLayout todayBackGround = convertView.findViewById(R.id.today_bg);
             todayBackGround.setBackgroundColor(convertView.getResources().getColor(R.color.colorCalenderTodayBG));
         }
 
