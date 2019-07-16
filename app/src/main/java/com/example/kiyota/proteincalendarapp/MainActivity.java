@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mImageViewNormal;
     ImageView mImageViewYogurt;
     ImageView mProteinIcon;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         //DBのデータ数を取得する処理
         int count = mDao.getDataCount();
+
 
         if (count == 0) {
             //DBの中にデータがない場合、初期値「0」を表示する
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         GridView grid = findViewById(R.id.calendar_grid);
 
-        cg = new CalendarGridAdapter(this, mCalendar, list);
+        cg = new CalendarGridAdapter(list, this, mCalendar);
 
         grid.setAdapter(cg);
 
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
                 //「プロテイン選択バー」のVisibleをTrueにする処理
                 LinearLayout linearLayout = findViewById(R.id.appear_select_protein);
@@ -129,13 +131,22 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //daoの登録メソッドを呼び出す
 
-                        String day = "2019/07/07";
+                        String day = "2019/07/15";
                         //Date型に変換する
                         //SimpleDateFormat dateFormat = new SimpleDateFormat(CALENDAR_FORMAT);
                         //String dateToString = (dateFormat.format(date));
                         mDao.registProteinAllInfo(day, ProteinType.stCOCOA);
-                        mProteinIcon.findViewById(R.id.protein_icon);
-                        mProteinIcon.setImageResource(R.drawable.ic_cocoa);
+
+                        //mEntityListの中身を更新するために、サイドすべてのデータを取得する
+                        try {
+                            mEntityList = mDao.selectAll();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        GridView grid = findViewById(R.id.calendar_grid);
+                        cg = new CalendarGridAdapter(mEntityList, mContext, mCalendar);
+                        grid.setAdapter(cg);
                     }
                 });
 

@@ -11,7 +11,7 @@ public class ProteinEntity {
     //ID
     private int id;
     //プロテインを飲んだ日付
-    private Date drinkingDay;
+    private java.util.Date drinkingDay;
     //プロテインを飲んだ日付(String)
     private String drinkingDayString;
     //飲んだプロテインの種類
@@ -23,7 +23,7 @@ public class ProteinEntity {
     //飲んだプロテインに含まれるタンパク質の量
     private int protein;
 
-    public ProteinEntity(int id, Date drinkingDay, String drinkingDayString, int proteinType, int price, int bottle, int protein) {
+    public ProteinEntity(int id, java.util.Date drinkingDay, String drinkingDayString, int proteinType, int price, int bottle, int protein) {
         this.id = id;
         this.drinkingDay = drinkingDay;
         this.drinkingDayString = drinkingDayString;
@@ -44,11 +44,11 @@ public class ProteinEntity {
         this.id = id;
     }
 
-    public Date getDrinkingDay() {
+    public java.util.Date getDrinkingDay() {
         return drinkingDay;
     }
 
-    public void setDrinkingDay(Date drinkingDay) {
+    public void setDrinkingDay(java.util.Date drinkingDay) {
         this.drinkingDay = drinkingDay;
     }
 
@@ -92,3 +92,4 @@ public class ProteinEntity {
         this.protein = protein;
     }
 }
+

@@ -231,9 +231,9 @@ public class ProteinProvider extends ContentProvider {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE " + INPUT_TABLE + " (" + ProteinCalendarContract.Input._ID
                     + " INTEGER PRIMARY KEY AUTOINCREMENT," + ProteinCalendarContract.Input.RECORD_DATE
-                    + " TEXT," + ProteinCalendarContract.Input.RECORD_TYPE + " TEXT,"
+                    + " TEXT," + ProteinCalendarContract.Input.RECORD_TYPE
                     + " TEXT," + ProteinCalendarContract.Input.RECORD_PRICE + " TEXT,"
-                    + " TEXT," + ProteinCalendarContract.Input.RECORD_BOTTLE + " TEXT,"
+                    + ProteinCalendarContract.Input.RECORD_BOTTLE + " TEXT,"
                     + ProteinCalendarContract.Input.RECORD_PROTEIN + " TEXT " + ");");
         }
 

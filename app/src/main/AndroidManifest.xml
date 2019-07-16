@@ -26,5 +26,12 @@
 
         </activity>
 
+        <provider
+            android:name="com.example.kiyota.proteincalendarapp.constants.ProteinProvider"
+            android:authorities="com.example.kiyota.proteincalendarapp.provider"
+            android:process=":ProteinProvider"
+            android:exported="true"
+            android:writePermission="com.example.kiyota.proteincalendarapp.provider.permission.WRITE_DATA" />
+
     </application>
 </manifest>

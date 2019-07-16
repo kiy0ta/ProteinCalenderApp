@@ -1,7 +1,6 @@
 package com.example.kiyota.proteincalendarapp.util;
 
 
-import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
 
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -16,15 +15,15 @@ import java.util.List;
 public class DateUtil {
 
     //日付の同日比較メソッド
-    public static boolean isSameDate(Date date1,Date date2) {
+    public static boolean isSameDate(java.util.Date date1, java.util.Date date2) {
         int result = DateUtils.truncatedCompareTo(date1,date2, Calendar.DATE);
         return result == 0;
     }
 
     //プロテインを飲んだ日かどうか確認するメソッド
-    public static boolean isDrinkingDate(List<ProteinEntity> drinkingDateList, Date targetDate) {
-        for(ProteinEntity date : drinkingDateList) {
-            if (isSameDate(date.getDrinkingDay(),targetDate)) {
+    public static boolean isDrinkingDate(List<Date> drinkingDateList, java.util.Date targetDate) {
+        for(Date date : drinkingDateList) {
+            if (isSameDate(date,targetDate)) {
                 return true;
             }
         }

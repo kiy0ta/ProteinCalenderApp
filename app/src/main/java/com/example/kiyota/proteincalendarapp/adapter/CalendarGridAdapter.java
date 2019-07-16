@@ -1,24 +1,25 @@
 package com.example.kiyota.proteincalendarapp.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.kiyota.proteincalendarapp.constants.ProteinType;
+import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
 import com.example.kiyota.proteincalendarapp.manager.CalenderDateManager;
 import com.example.kiyota.proteincalendarapp.util.DateUtil;
 import com.example.kiyota.proteincalenderapp.R;
-import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -31,25 +32,28 @@ public class CalendarGridAdapter extends BaseAdapter {
     private List<Date> mDateArray = new ArrayList();
     //当月のみを格納しているリスト
     private ArrayList<Integer> mCurrentMonthDayList;
+    //飲んだ日付とプロテインの種類を突き合わせるためにhashMap
+    HashMap<Date, String> hashmap = new HashMap<Date, String>();
     //日付計算クラスのインスタンス
     private CalenderDateManager mDateManager;
     //プロテインを飲んだ日付を格納しているリスト
-    //プロテインを飲んだ日付を格納しているEntity
-    private List<ProteinEntity> mDrinkingDateList;
+    private List<Date> mDrinkingDateList;
+    //DB内の全データを保持するリスト
+    private List<ProteinEntity> mEntityList = new ArrayList<ProteinEntity>();
     //カレンダーの月フォーマット型
     private static final String CALENDAR_MONTH_FORMAT = "yyyy/MM";
     //カレンダーの日付フォーマット型
     private static final String CALENDAR_DATE_FORMAT = "d";
+    //TODO "これなんだろな？"
+    LayoutInflater mLayoutInflater;
     //Context
     public Context mContext;
 
     //コンストラクタ
-    public CalendarGridAdapter(Context context, Calendar calendar, List<ProteinEntity> drinkingDateList) {
+    public CalendarGridAdapter(List<ProteinEntity> entityList, Context context,Calendar calendar) {
+        this.mEntityList = entityList;
         this.mDateManager = new CalenderDateManager(calendar);
-        this.mDateArray = this.mDateManager.getDays();
-        this.mDrinkingDateList = drinkingDateList;
-        this.mContext = context;
-        this.mCurrentMonthDayList = new ArrayList<Integer>();
+        this.mLayoutInflater = LayoutInflater.from(context);
     }
 
     //カレンダーのセルの総数を取得するメソッド
@@ -61,6 +65,12 @@ public class CalendarGridAdapter extends BaseAdapter {
     //View取得メソッド
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        //List<Entity>から、List<Date>を作成する
+        for (ProteinEntity entity : mEntityList) {
+            mDrinkingDateList.add(entity.getDrinkingDay());
+            hashmap.put(entity.getDrinkingDay(), Integer.toString(entity.getProteinType()));
+        }
 
         // View保持クラス取得
         ViewHolder holder;
@@ -116,34 +126,34 @@ public class CalendarGridAdapter extends BaseAdapter {
         }
 
         //当月かつ、当日の場合は日付の背景色を透過きみどり色に変更する
-        if (isCurrentMonth(position) && DateUtil.isSameDate(getDate(position), new Date())) {
+        if (isCurrentMonth(position) && DateUtil.isSameDate(getDate(position), new java.util.Date())) {
             RelativeLayout todayBackGround = convertView.findViewById(R.id.today_bg);
             todayBackGround.setBackgroundColor(convertView.getResources().getColor(R.color.colorCalenderTodayBG));
         }
 
         //当日かつ、プロテインを飲んだ履歴がある場合、適当なプロテイン画像を表示
-        if (isCurrentMonth(position) && DateUtil.isDrinkingDate(this.mDrinkingDateList, getDate(position))) {
+        if (isCurrentMonth(position) && DateUtil.isDrinkingDate(mDrinkingDateList, getDate(position))) {
 
-            switch (this.mDrinkingDateList.get(position).getProteinType()) {
-                case ProteinType.COCOA:
+            switch (hashmap.get(this.mDrinkingDateList.get(position))) {
+                //HashMapのValueにStringが入っているので、
+
+                case ProteinType.stCOCOA:
                     holder.proteinIcon = convertView.findViewById(R.id.protein_icon);
                     holder.proteinIcon.setBackgroundResource(R.drawable.ic_cocoa);
                     break;
-                case ProteinType.LEMON:
+                case ProteinType.stLEMON:
                     holder.proteinIcon = convertView.findViewById(R.id.protein_icon);
                     holder.proteinIcon.setBackgroundResource(R.drawable.ic_lemon);
                     break;
-                case ProteinType.NORMAL:
+                case ProteinType.stNORMAL:
                     holder.proteinIcon = convertView.findViewById(R.id.protein_icon);
                     holder.proteinIcon.setBackgroundResource(R.drawable.ic_nomal);
                     break;
-                case ProteinType.YOGURT:
+                case ProteinType.stYOGURT:
                     holder.proteinIcon = convertView.findViewById(R.id.protein_icon);
                     holder.proteinIcon.setBackgroundResource(R.drawable.ic_yogurt);
                     break;
                 default:
-                    holder.proteinIcon = convertView.findViewById(R.id.protein_icon);
-                    holder.proteinIcon.setBackgroundResource(R.drawable.ic_yogurt);
                     break;
             }
         }
@@ -175,7 +185,7 @@ public class CalendarGridAdapter extends BaseAdapter {
     }
 
     //日付リストから日付を取得するメソッド
-    public Date getDate(int position) {
+    public java.util.Date getDate(int position) {
         return this.mDateArray.get(position);
     }
 

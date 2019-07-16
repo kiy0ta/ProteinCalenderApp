@@ -11,7 +11,6 @@ import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,7 +37,7 @@ public class ProteinCalendarDao {
         values.put(ProteinCalendarContract.Input.RECORD_PRICE, DefaultData.defaultPrice);
         values.put(ProteinCalendarContract.Input.RECORD_BOTTLE, DefaultData.defaultBottle);
         values.put(ProteinCalendarContract.Input.RECORD_PROTEIN, DefaultData.defaultProtein);
-        mContext.getContentResolver().insert(ProteinCalendarContract.Input.CONTENT_URI,values);
+        mContext.getContentResolver().insert(ProteinCalendarContract.Input.CONTENT_URI, values);
     }
 
     //DBの中のデータ数をカウントする処理
@@ -85,7 +84,7 @@ public class ProteinCalendarDao {
                     //Stringで取得した「日付」をDateに変換して、Dateの「日付」にsetする
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                     // Date型変換
-                    Date formatDate = sdf.parse(entity.getDrinkingDayString());
+                    java.util.Date formatDate = sdf.parse(entity.getDrinkingDayString());
                     entity.setDrinkingDay(formatDate);
                     entity.setProteinType(cur.getInt(2));
                     entity.setPrice(cur.getInt(3));
