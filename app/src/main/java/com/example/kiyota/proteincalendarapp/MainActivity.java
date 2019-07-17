@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    CalendarGridAdapter cg;
+    CalendarGridAdapter mCalendarGridView;
     Calendar mCalendar;
     TextView mTextViewForPrice;
     TextView mTextViewForBottle;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mImageViewNormal;
     ImageView mImageViewYogurt;
     ImageView mProteinIcon;
-    Context mContext;
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
         //カレンダークラスのオブジェクトを生成する(= new)
         mCalendar = Calendar.getInstance();
 
-        List<ProteinEntity> list = new ArrayList<ProteinEntity>();
+//        List<ProteinEntity> list = new ArrayList<ProteinEntity>();
 
         GridView grid = findViewById(R.id.calendar_grid);
 
-        cg = new CalendarGridAdapter(list, this, mCalendar);
+        mCalendarGridView = new CalendarGridAdapter(mEntityList, this, mCalendar);
 
-        grid.setAdapter(cg);
+        grid.setAdapter(mCalendarGridView);
 
         //gridViewの1マスをクリックしたときの処理
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -145,8 +145,10 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         GridView grid = findViewById(R.id.calendar_grid);
-                        cg = new CalendarGridAdapter(mEntityList, mContext, mCalendar);
-                        grid.setAdapter(cg);
+                        mCalendarGridView = new CalendarGridAdapter(mEntityList, mContext, mCalendar);
+                        grid.setAdapter(mCalendarGridView);
+                        LinearLayout linearLayout = findViewById(R.id.appear_select_protein);
+                        linearLayout.setVisibility(View.GONE);
                     }
                 });
 
@@ -157,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onClick(View v) {
-                        //daoの登録メソッドを呼び出す
 
                         String day = "2019/07/09";
                         //Date型に変換する

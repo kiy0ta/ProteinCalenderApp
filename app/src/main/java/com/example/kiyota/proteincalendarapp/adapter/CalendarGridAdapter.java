@@ -33,27 +33,30 @@ public class CalendarGridAdapter extends BaseAdapter {
     //当月のみを格納しているリスト
     private ArrayList<Integer> mCurrentMonthDayList;
     //飲んだ日付とプロテインの種類を突き合わせるためにhashMap
-    HashMap<Date, String> hashmap = new HashMap<Date, String>();
+    public HashMap<Date, String> hashmap = new HashMap<Date, String>();
     //日付計算クラスのインスタンス
     private CalenderDateManager mDateManager;
     //プロテインを飲んだ日付を格納しているリスト
-    private List<Date> mDrinkingDateList;
+    public List<Date> mDrinkingDateList = new ArrayList<Date>();
     //DB内の全データを保持するリスト
     private List<ProteinEntity> mEntityList = new ArrayList<ProteinEntity>();
     //カレンダーの月フォーマット型
     private static final String CALENDAR_MONTH_FORMAT = "yyyy/MM";
     //カレンダーの日付フォーマット型
     private static final String CALENDAR_DATE_FORMAT = "d";
-    //TODO "これなんだろな？"
+    //Viewをnewするためのもの
     LayoutInflater mLayoutInflater;
     //Context
     public Context mContext;
 
     //コンストラクタ
-    public CalendarGridAdapter(List<ProteinEntity> entityList, Context context,Calendar calendar) {
+    public CalendarGridAdapter(List<ProteinEntity> entityList, Context context, Calendar calendar) {
+        this.mContext = context;
         this.mEntityList = entityList;
         this.mDateManager = new CalenderDateManager(calendar);
-        this.mLayoutInflater = LayoutInflater.from(context);
+        this.mLayoutInflater = LayoutInflater.from(mContext);
+        this.mDateArray = this.mDateManager.getDays();
+        this.mCurrentMonthDayList = new ArrayList<Integer>();
     }
 
     //カレンダーのセルの総数を取得するメソッド
@@ -79,9 +82,9 @@ public class CalendarGridAdapter extends BaseAdapter {
 
             //View.inflateを使わずに、mLayoutInflaterを使う場合は、contextが必要
             convertView = View.inflate(mContext, R.layout.calender_cell_layout, null);
-            holder = new ViewHolder();
 
             //日付を取得する
+            holder = new ViewHolder();
             holder.dateText = convertView.findViewById(R.id.dateText);
             convertView.setTag(holder);
 
@@ -104,17 +107,21 @@ public class CalendarGridAdapter extends BaseAdapter {
             //当月の場合、当月リストに追加する
             this.mCurrentMonthDayList.add(position);
 
+
             //日付の文字色を、曜日に応じた色を取得して適用する処理
             switch (this.mDateManager.getDayOfWeek(getDate(position))) {
                 case Calendar.SUNDAY:
                     colorId = R.color.colorCalenderSunday;
+                    holder.dateText.setTextColor(colorId);
                     break;
                 case Calendar.SATURDAY:
                     colorId = R.color.colorCalenderSaturday;
+                    holder.dateText.setTextColor(colorId);
                     break;
                 default:
                     //TODO "文字色をグレーに修正する(かも)"
                     colorId = R.color.color_black;
+                    holder.dateText.setTextColor(colorId);
                     break;
             }
 
@@ -122,6 +129,7 @@ public class CalendarGridAdapter extends BaseAdapter {
 
             //当月じゃない日付の文字色はグレーにする
             colorId = R.color.color_calendar_not_current_month_date;
+            holder.dateText.setTextColor(colorId);
 
         }
 
