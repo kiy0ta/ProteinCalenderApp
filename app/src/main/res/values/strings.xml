@@ -12,5 +12,7 @@
     <string name="calender_last_month">前月</string>
     <string name="calender_next_month">次月</string>
     <string name="calender_select_protein_type">プロテインの種類を選択する</string>
+    <string name="dialog_close_button">閉じる</string>
+    <string name="dialog_message">すでにプロテインが記録されています</string>
 
 </resources>

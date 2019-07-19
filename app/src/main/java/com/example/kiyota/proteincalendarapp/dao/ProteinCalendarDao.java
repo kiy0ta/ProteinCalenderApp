@@ -131,4 +131,27 @@ public class ProteinCalendarDao {
         //return nullにすると落ちる
         return list;
     }
+
+    //特定の日付のTypeの値を取得する
+    public List<ProteinEntity> selectTypeDate(String date) throws ParseException {
+        List<ProteinEntity> list = new ArrayList<ProteinEntity>();
+        String[] projection = new String[]{
+
+                ProteinCalendarContract.Input.RECORD_TYPE
+        };
+
+        try (Cursor cur = mContext.getContentResolver().query(ProteinCalendarContract.Input.CONTENT_URI, projection,
+                ProteinCalendarContract.Input.RECORD_DATE + " like ?" , new String[]{date} , null)) {
+
+            if (cur != null && cur.getCount() > 0) {
+                while (cur.moveToNext()) {
+                    ProteinEntity entity = new ProteinEntity();
+                    entity.setProteinType(cur.getInt(0));
+                    list.add(entity);
+                }
+            }
+        }
+        //return nullにすると落ちる
+        return list;
+    }
 }

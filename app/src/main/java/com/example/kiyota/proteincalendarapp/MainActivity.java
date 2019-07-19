@@ -1,7 +1,11 @@
 package com.example.kiyota.proteincalendarapp;
 
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -179,6 +183,39 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                List<ProteinEntity> entityList = new ArrayList<ProteinEntity>();
+                Date clickedDate = (Date) mCalendarGridView.getItem(position);
+
+                //Date型に変換する
+                SimpleDateFormat dateFormat = new SimpleDateFormat(CLICKED_CALENDAR_FORMAT, Locale.JAPAN);
+                String dateToString = (dateFormat.format(clickedDate));
+
+                try {
+                    entityList = mDao.selectTypeDate(dateToString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                for(ProteinEntity entity : entityList){
+                    if(entity.getProteinType() >= 0 ){
+                        Resources res = getResources();
+                        //Dialogを呼び出す処理
+                        new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle)
+                                .setMessage(R.string.dialog_message)
+                                //閉じるボタン押下でダイアログを閉じる処理
+                                .setNegativeButton(res.getString(R.string.dialog_close_button), null)
+                                //Dialogを閉じる処理
+                                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                    }
+                                })
+                                .show();
+                        return;
+                }
+                }
+
 
                 //「プロテイン選択バー」のVisibleをTrueにする処理
                 LinearLayout linearLayout = findViewById(R.id.appear_select_protein);
