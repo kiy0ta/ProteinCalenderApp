@@ -3,6 +3,7 @@ package com.example.kiyota.proteincalendarapp.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.kiyota.proteincalendarapp.constants.DefaultData;
 import com.example.kiyota.proteincalendarapp.constants.ProteinCalendarContract;
@@ -20,17 +21,13 @@ import java.util.List;
 public class ProteinCalendarDao {
 
     private Context mContext;
-    //カレンダーのフォーマット型
-    private static final String CALENDAR_FORMAT = "yyyy/MM/dd";
 
     public ProteinCalendarDao(Context context) {
         mContext = context;
     }
 
     //プロテイン画像を押下したら、日付とタイプを登録する
-//    public void registProteinAllInfo(Date date,int type){
     public void registProteinAllInfo(String date, String type) {
-
         ContentValues values = new ContentValues();
         values.put(ProteinCalendarContract.Input.RECORD_DATE, date);
         values.put(ProteinCalendarContract.Input.RECORD_TYPE, type);
@@ -92,10 +89,46 @@ public class ProteinCalendarDao {
                     entity.setProtein(cur.getInt(5));
                     list.add(entity);
                 }
-                return list;
             }
         }
-        return null;
+        //return nullにすると落ちる
+        return list;
+    }
 
+    //DBに入っているデータをすべて取得してEntityに格納する
+    public List<ProteinEntity> selectCurrentMonth(String titleMonth) throws ParseException {
+        List<ProteinEntity> list = new ArrayList<ProteinEntity>();
+        String[] projection = new String[]{
+                ProteinCalendarContract.Input._ID,
+                ProteinCalendarContract.Input.RECORD_DATE,
+                ProteinCalendarContract.Input.RECORD_TYPE,
+                ProteinCalendarContract.Input.RECORD_PRICE,
+                ProteinCalendarContract.Input.RECORD_BOTTLE,
+                ProteinCalendarContract.Input.RECORD_PROTEIN
+        };
+
+        try (Cursor cur = mContext.getContentResolver().query(ProteinCalendarContract.Input.CONTENT_URI, projection,
+                ProteinCalendarContract.Input.RECORD_DATE + " like ?" , new String[]{titleMonth + "%"} , null)) {
+
+            if (cur != null && cur.getCount() > 0) {
+                while (cur.moveToNext()) {
+                    ProteinEntity entity = new ProteinEntity();
+                    entity.setId(cur.getInt(0));
+                    entity.setDrinkingDayString(cur.getString(1));
+                    //Stringで取得した「日付」をDateに変換して、Dateの「日付」にsetする
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                    // Date型変換
+                    java.util.Date formatDate = sdf.parse(entity.getDrinkingDayString());
+                    entity.setDrinkingDay(formatDate);
+                    entity.setProteinType(cur.getInt(2));
+                    entity.setPrice(cur.getInt(3));
+                    entity.setBottle(cur.getInt(4));
+                    entity.setProtein(cur.getInt(5));
+                    list.add(entity);
+                }
+            }
+        }
+        //return nullにすると落ちる
+        return list;
     }
 }

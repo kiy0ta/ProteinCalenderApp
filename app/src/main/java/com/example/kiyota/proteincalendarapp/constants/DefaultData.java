@@ -19,28 +19,4 @@ public class DefaultData {
     public DefaultData() {
     }
 
-    public static String getDefaultTotalPrice() {
-        return defaultTotalPrice;
-    }
-
-    public static String getDefaultTotalBottle() {
-        return defaultTotalBottle;
-    }
-
-    public static String getDefaultTotalProtein() {
-        return defaultTotalProtein;
-    }
-
-
-    public static String getDefaultBottle() {
-        return defaultBottle;
-    }
-
-    public static String getDefaultPrice() {
-        return defaultPrice;
-    }
-
-    public static String getDefaultProtein() {
-        return defaultProtein;
-    }
 }

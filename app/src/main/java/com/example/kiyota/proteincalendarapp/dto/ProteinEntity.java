@@ -23,16 +23,6 @@ public class ProteinEntity {
     //飲んだプロテインに含まれるタンパク質の量
     private int protein;
 
-    public ProteinEntity(int id, java.util.Date drinkingDay, String drinkingDayString, int proteinType, int price, int bottle, int protein) {
-        this.id = id;
-        this.drinkingDay = drinkingDay;
-        this.drinkingDayString = drinkingDayString;
-        this.proteinType = proteinType;
-        this.price = price;
-        this.bottle = bottle;
-        this.protein = protein;
-    }
-
     public ProteinEntity() {
     }
 
@@ -90,6 +80,19 @@ public class ProteinEntity {
 
     public void setProtein(int protein) {
         this.protein = protein;
+    }
+
+    @Override
+    public String toString() {
+        return "ProteinEntity{" +
+                "id=" + id +
+                ", drinkingDay=" + drinkingDay +
+                ", drinkingDayString='" + drinkingDayString + '\'' +
+                ", proteinType=" + proteinType +
+                ", price=" + price +
+                ", bottle=" + bottle +
+                ", protein=" + protein +
+                '}';
     }
 }
 

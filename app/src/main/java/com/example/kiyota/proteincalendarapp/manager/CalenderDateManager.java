@@ -16,10 +16,10 @@ public class CalenderDateManager {
     public Calendar mCalendar;
     //選択日の月と現在の月が合致するか、判定するために月までに整形する
     private static final String IS_CURRENT_MONTH_FORMAT = "yyyy.MM";
-    //adapterで呼び出すために作成した定数
-    public static final int COUNT_WEEKS = 6;
     //カレンダー(GridView)のマスの総数を計算する
     public static final int COUNT_DAYS = 6 * 7;
+    //表示しているカレンダーのタイトル用フォーマット
+    private static final String FORMAT_FOR_TITLE = "yyyy/MM";
 
     //コンストラクタ
     public CalenderDateManager(Calendar calender) {
@@ -65,6 +65,21 @@ public class CalenderDateManager {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.DAY_OF_WEEK);
+    }
+
+    //「前月」または「次月」のカレンダーをセットする
+    public void lastMonth(int i) {
+        this.mCalendar.add(Calendar.MONTH, i);
+    }
+
+    //カレンダーの日付を取得、フォーマットして返すメソッド
+    //MainのTitleMonth表示に使用する
+    public String getCalendarMonth() {
+        Date date = mCalendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat(FORMAT_FOR_TITLE);
+        String dateTitle;
+        dateTitle = format.format(date);
+        return dateTitle;
     }
 
 }

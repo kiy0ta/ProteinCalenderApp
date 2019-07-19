@@ -11,8 +11,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/today_bg">
+        android:layout_height="wrap_content"
+        android:id="@+id/today_bg"
+       >
+
 
         <LinearLayout
 
@@ -36,7 +38,7 @@
 
             <ImageView
                 android:id="@+id/protein_icon"
-                android:layout_width="50dp"
+                android:layout_width="56dp"
                 android:layout_height="40dp"
                 />
         </RelativeLayout>

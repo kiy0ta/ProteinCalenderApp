@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/excludeRadioButtonArea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <!--「今月の合計」タイトル、背景色を設定-->
@@ -141,7 +141,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="14dp"
                         android:layout_marginRight="14dp"
-                        android:text="YYYY/MM"
+
                         android:textColor="@color/colorCalenderSelectMonth"
                         android:textSize="18dp" />
 
@@ -169,54 +169,47 @@
             <!--カレンダーのGridViewをFragmentとして挿入している-->
             <include layout="@layout/fragment_calender" />
 
-            <!--カレンダー用の範囲を確保-->
-            <!--TODO ”必要かどうか、動作を確認する”-->
-            <FrameLayout
-                android:id="@+id/calender_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
 
-        <!--「グラフ集計」アイコンと、ボタンを中央揃えにする-->
-        <RelativeLayout
-            android:id="@+id/totalization_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp">
+        <!--&lt;!&ndash;「グラフ集計」アイコンと、ボタンを中央揃えにする&ndash;&gt;-->
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/totalization_area"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="20dp">-->
 
 
-            <!--「グラフ集計」アイコンと、ボタンを横に並べる-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/shape_rounded_corner"
-                android:orientation="horizontal">
+        <!--&lt;!&ndash;「グラフ集計」アイコンと、ボタンを横に並べる&ndash;&gt;-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="@drawable/shape_rounded_corner"-->
+        <!--android:orientation="horizontal">-->
 
-                <!--「グラフ集計」の画像-->
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_marginLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:src="@drawable/ic_totalization" />
+        <!--&lt;!&ndash;「グラフ集計」の画像&ndash;&gt;-->
+        <!--<ImageView-->
+        <!--android:layout_width="26dp"-->
+        <!--android:layout_height="26dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:src="@drawable/ic_totalization" />-->
 
-                <!--「グラフ集計」のボタン(と文字列)-->
-                <Button
-                    android:id="@+id/totalization_button"
-                    android:layout_width="96dp"
-                    android:layout_height="36dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/colorTotalization"
-                    android:text="@string/look_total"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-                    android:textSize="18dp" />
+        <!--&lt;!&ndash;「グラフ集計」のボタン(と文字列)&ndash;&gt;-->
+        <!--<Button-->
+        <!--android:id="@+id/totalization_button"-->
+        <!--android:layout_width="96dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:background="@color/colorTotalization"-->
+        <!--android:text="@string/look_total"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"-->
+        <!--android:textSize="18dp" />-->
 
-            </LinearLayout>
+        <!--</LinearLayout>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
         <!--「今月の合計」から「カレンダー」に対して、
              「プロテイン選択バー」の位置を、
@@ -225,7 +218,7 @@
             android:id="@+id/appear_select_protein"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_alignBottom="@+id/totalization_area"
+            android:layout_alignBottom="@+id/excludeRadioButtonArea"
             android:background="@color/color_white"
             android:orientation="vertical"
             android:visibility="gone">
