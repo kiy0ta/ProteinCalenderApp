@@ -1,9 +1,7 @@
-package com.example.kiyota.proteincalendarapp.constants;
+package com.kiyota.proteincalendarapp.constants;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
-
-import java.util.Date;
 
 /**
  * Created by kiyota on 2019/07/12.
@@ -11,7 +9,7 @@ import java.util.Date;
 
 public class ProteinCalendarContract {
 
-    public static final String AUTHORITY = "com.example.kiyota.proteincalendarapp.provider";
+    public static final String AUTHORITY = "com.kiyota.proteincalendarapp.provider";
     public static final String PATH_INPUT = "spa_input";
 
 

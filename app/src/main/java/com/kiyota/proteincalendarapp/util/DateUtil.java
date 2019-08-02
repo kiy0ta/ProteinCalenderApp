@@ -1,7 +1,5 @@
-package com.example.kiyota.proteincalendarapp.util;
+package com.kiyota.proteincalendarapp.util;
 
-
-import android.util.Log;
 
 import org.apache.commons.lang3.time.DateUtils;
 

@@ -1,4 +1,4 @@
-package com.example.kiyota.proteincalendarapp.constants;
+package com.kiyota.proteincalendarapp.constants;
 
 /**
  * Created by kiyota on 2019/07/12.

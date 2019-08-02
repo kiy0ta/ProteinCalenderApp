@@ -1,13 +1,12 @@
-package com.example.kiyota.proteincalendarapp.dao;
+package com.kiyota.proteincalendarapp.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
-import com.example.kiyota.proteincalendarapp.constants.DefaultData;
-import com.example.kiyota.proteincalendarapp.constants.ProteinCalendarContract;
-import com.example.kiyota.proteincalendarapp.dto.ProteinEntity;
+import com.kiyota.proteincalendarapp.constants.DefaultData;
+import com.kiyota.proteincalendarapp.constants.ProteinCalendarContract;
+import com.kiyota.proteincalendarapp.dto.ProteinEntity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

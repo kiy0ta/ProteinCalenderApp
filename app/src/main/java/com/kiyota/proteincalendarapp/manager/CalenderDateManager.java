@@ -1,6 +1,4 @@
-package com.example.kiyota.proteincalendarapp.manager;
-
-import android.util.Log;
+package com.kiyota.proteincalendarapp.manager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

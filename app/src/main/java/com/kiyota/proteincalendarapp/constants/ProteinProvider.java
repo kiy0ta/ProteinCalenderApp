@@ -1,4 +1,4 @@
-package com.example.kiyota.proteincalendarapp.constants;
+package com.kiyota.proteincalendarapp.constants;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -15,9 +15,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.example.kiyota.proteincalendarapp.util.LogUtil;
+import com.kiyota.proteincalendarapp.util.LogUtil;
 
-import java.util.Date;
 import java.util.HashMap;
 
 /**

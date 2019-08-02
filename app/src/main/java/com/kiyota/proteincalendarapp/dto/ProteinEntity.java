@@ -1,6 +1,4 @@
-package com.example.kiyota.proteincalendarapp.dto;
-
-import java.util.Date;
+package com.kiyota.proteincalendarapp.dto;
 
 /**
  * Created by kiyota on 2019/07/12.
