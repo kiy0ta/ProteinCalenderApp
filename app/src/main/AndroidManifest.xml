@@ -8,29 +8,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.kiyokiyo.proteincalenderapp.MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.TopActivity"
+            android:exported="false"
+            android:label="@string/app_name" />
+
         <!--<activity-->
-            <!--android:name="com.kiyokiyo.proteincalenderapp.activity.TotalizationActivity"-->
-            <!--android:exported="false"-->
-            <!--android:label="@string/app_name"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/AppTheme">-->
+        <!--android:name="com.kiyokiyo.proteincalenderapp.activity.TotalizationActivity"-->
+        <!--android:exported="false"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/AppTheme">-->
 
         <!--</activity>-->
 
         <provider
             android:name="com.kiyokiyo.proteincalenderapp.constants.ProteinProvider"
             android:authorities="com.kiyokiyo.proteincalenderapp.provider"
-            android:process=":ProteinProvider"
             android:exported="true"
+            android:process=":ProteinProvider"
             android:writePermission="com.kiyokiyo.proteincalenderapp.provider.permission.WRITE_DATA" />
 
     </application>

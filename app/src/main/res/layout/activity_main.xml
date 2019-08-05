@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kiyota.proteincalendarapp.MainActivity">
+    tools:context="com.kiyokiyo.proteincalenderapp.activity.TopActivity">
 
     <!--「今月の合計」から「カレンダー」に対して、
              「プロテイン選択バー」の位置を、設定するためのRelative-->

@@ -1,6 +1,7 @@
-package com.kiyokiyo.proteincalenderapp;
+package com.kiyokiyo.proteincalenderapp.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kiyokiyo.proteincalenderapp.R;
 import com.kiyokiyo.proteincalenderapp.constants.DefaultData;
 import com.kiyokiyo.proteincalenderapp.constants.ProteinType;
 import com.kiyokiyo.proteincalenderapp.dao.ProteinCalendarDao;
@@ -27,7 +29,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MainActivity extends AppCompatActivity {
+public class TopActivity extends AppCompatActivity {
 
     CalendarGridAdapter mCalendarGridView;
     Calendar mCalendar;
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     //カレンダーの月フォーマット型
     private static final String CLICKED_CALENDAR_FORMAT = "yyyy/MM/dd";
     TextView mTitleText;
+
+    public static Intent getStartIntent(SplashActivity splashActivity) {
+        return new Intent(splashActivity, TopActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     if(entity.getProteinType() >= 0 ){
                         Resources res = getResources();
                         //Dialogを呼び出す処理
-                        new AlertDialog.Builder(MainActivity.this,R.style.MyAlertDialogStyle)
+                        new AlertDialog.Builder(TopActivity.this,R.style.MyAlertDialogStyle)
                                 .setMessage(R.string.dialog_message)
                                 //閉じるボタン押下でダイアログを閉じる処理
                                 .setNegativeButton(res.getString(R.string.dialog_close_button), null)
@@ -321,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
         mTextViewForProtein.setText(sumProteinString + " g");
 
     }
+
 
 }
 
