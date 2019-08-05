@@ -1,9 +1,9 @@
-package com.kiyota.proteincalendarapp.activity;
+package com.kiyokiyo.proteincalendarapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.kiyota.proteincalenderapp.R;
+import com.kiyokiyo.proteincalenderapp.R;
 
 /**
  * Created by kiyota on 2019/07/11.

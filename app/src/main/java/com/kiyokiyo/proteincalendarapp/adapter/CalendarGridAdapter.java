@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.adapter;
+package com.kiyokiyo.proteincalendarapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.kiyota.proteincalendarapp.constants.ProteinType;
-import com.kiyota.proteincalendarapp.dto.ProteinEntity;
-import com.kiyota.proteincalendarapp.manager.CalenderDateManager;
-import com.kiyota.proteincalendarapp.util.DateUtil;
-import com.kiyota.proteincalenderapp.R;
+import com.kiyokiyo.proteincalendarapp.constants.ProteinType;
+import com.kiyokiyo.proteincalendarapp.dto.ProteinEntity;
+import com.kiyokiyo.proteincalendarapp.manager.CalenderDateManager;
+import com.kiyokiyo.proteincalendarapp.util.DateUtil;
+import com.kiyokiyo.proteincalenderapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

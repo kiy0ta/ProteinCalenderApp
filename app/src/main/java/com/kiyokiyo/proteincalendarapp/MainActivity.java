@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp;
+package com.kiyokiyo.proteincalendarapp;
 
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.kiyota.proteincalendarapp.constants.DefaultData;
-import com.kiyota.proteincalendarapp.constants.ProteinType;
-import com.kiyota.proteincalendarapp.dao.ProteinCalendarDao;
-import com.kiyota.proteincalendarapp.dto.ProteinEntity;
-import com.kiyota.proteincalenderapp.R;
-import com.kiyota.proteincalendarapp.adapter.CalendarGridAdapter;
+import com.kiyokiyo.proteincalendarapp.constants.DefaultData;
+import com.kiyokiyo.proteincalendarapp.constants.ProteinType;
+import com.kiyokiyo.proteincalendarapp.dao.ProteinCalendarDao;
+import com.kiyokiyo.proteincalendarapp.dto.ProteinEntity;
+import com.kiyokiyo.proteincalenderapp.R;
+import com.kiyokiyo.proteincalendarapp.adapter.CalendarGridAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

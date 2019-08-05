@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.util;
+package com.kiyokiyo.proteincalendarapp.util;
 
 import android.util.Log;
 

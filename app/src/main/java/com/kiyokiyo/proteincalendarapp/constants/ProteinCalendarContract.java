@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.constants;
+package com.kiyokiyo.proteincalendarapp.constants;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

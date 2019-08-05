@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.dto;
+package com.kiyokiyo.proteincalendarapp.dto;
 
 /**
  * Created by kiyota on 2019/07/12.

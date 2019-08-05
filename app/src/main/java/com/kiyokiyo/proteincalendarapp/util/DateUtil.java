@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.util;
+package com.kiyokiyo.proteincalendarapp.util;
 
 
 import org.apache.commons.lang3.time.DateUtils;

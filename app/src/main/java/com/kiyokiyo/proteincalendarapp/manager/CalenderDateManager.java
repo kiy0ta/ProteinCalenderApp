@@ -1,4 +1,4 @@
-package com.kiyota.proteincalendarapp.manager;
+package com.kiyokiyo.proteincalendarapp.manager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
