@@ -15,6 +15,7 @@
     <color name="colorCalenderSelectMonth">#686464</color>
     <color name="colorCalenderTodayBG">#89a7d679</color>
     <color name="color_calendar_not_current_month_date">#c2c2c2</color>
+    <color name="color_over_calendar_button">#c7807f7f</color>
 
     <!--<color name="colorCalenderSelectMonth">#6a7173</color>-->
 

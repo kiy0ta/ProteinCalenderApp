@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,8 @@ public class TopActivity extends AppCompatActivity {
     ImageView mImageViewLemon;
     ImageView mImageViewNormal;
     ImageView mImageViewYogurt;
+    Button mButtonOverCalendar;
+    LinearLayout mLinearLayout;
 
     //カレンダーの月フォーマット型
     private static final String CLICKED_CALENDAR_FORMAT = "yyyy/MM/dd";
@@ -222,8 +225,12 @@ public class TopActivity extends AppCompatActivity {
 
 
                 //「プロテイン選択バー」のVisibleをTrueにする処理
-                LinearLayout linearLayout = findViewById(R.id.appear_select_protein);
-                linearLayout.setVisibility(View.VISIBLE);
+                mLinearLayout = findViewById(R.id.appear_select_protein);
+                mLinearLayout.setVisibility(View.VISIBLE);
+
+                //カレンダーを覆うボタンのVisibleをTrueにする処理
+                mButtonOverCalendar = findViewById(R.id.button_over_calendar);
+                mButtonOverCalendar.setVisibility(View.VISIBLE);
 
                 //「プロテイン選択バー」の画像(ココア)を押下したときの処理
                 mImageViewCocoa = findViewById(R.id.calendar_protein_type_cocoa);
@@ -262,6 +269,15 @@ public class TopActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         clickProcess(position, ProteinType.stYOGURT);
+                    }
+                });
+
+                //グレー部分を押下したらキャンセルする処理
+                mButtonOverCalendar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mLinearLayout.setVisibility(View.GONE);
+                        mButtonOverCalendar.setVisibility(View.GONE);
                     }
                 });
 
@@ -304,7 +320,8 @@ public class TopActivity extends AppCompatActivity {
                     }
 
                     setTotalText(sumPrice, sumBottle, sumProtein);
-                    linearLayout.setVisibility(View.GONE);
+                    mLinearLayout.setVisibility(View.GONE);
+                    mButtonOverCalendar.setVisibility(View.GONE);
 
                 } catch (
                         ParseException e)

@@ -9,167 +9,178 @@
              「プロテイン選択バー」の位置を、設定するためのRelative-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!--「今月の合計」から、「グラフ集計」までを縦に並べる-->
-        <LinearLayout
-            android:id="@+id/excludeRadioButtonArea"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <!--「今月の合計」タイトル、背景色を設定-->
-            <TextView
+            <Button
+                android:id="@+id/button_over_calendar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTotalization"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                android:text="@string/total_on_month"
-                android:textColor="@android:color/background_light"
-                android:textSize="18dp" />
+                android:layout_height="match_parent"
+                android:background="@color/color_over_calendar_button"
+                android:visibility="gone" />
 
-            <!--「合計金額」から、「合計タンパク質」までを中央揃えにする-->
-            <RelativeLayout
+            <!--「今月の合計」から、「グラフ集計」までを縦に並べる-->
+            <LinearLayout
+                android:id="@+id/excludeRadioButtonArea"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTotalContents">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <!--「合計金額」から、「合計タンパク質」までを横に並べる-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <!--「今月の合計」タイトル、背景色を設定-->
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp">
+                    android:background="@color/colorTotalization"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:text="@string/total_on_month"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="18dp" />
 
-                    <!--「合計金額」の画像-->
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_total_price" />
-
-                    <!--「合計金額」の文字列-->
-                    <TextView
-                        android:id="@+id/total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="7dp"
-                        android:textAlignment="center"
-                        android:textSize="16dp" />
-
-                    <!--「合計本数」の画像-->
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_total_bottle" />
-
-                    <!--「合計本数」の文字列-->
-                    <TextView
-                        android:id="@+id/total_bottle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="7dp"
-                        android:textAlignment="center"
-                        android:textSize="16dp" />
-
-                    <!--「合計タンパク質」の画像-->
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_total_protein" />
-
-                    <!--「合計タンパク質」の文字列-->
-                    <TextView
-                        android:id="@+id/total_protein"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="7dp"
-                        android:textAlignment="center"
-                        android:textSize="16dp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <!--カレンダーの月を選択する-->
-            <!--「左矢印」から、「右矢印」までを中央揃えにする-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp">
-
-                <!--「左矢印」から、「右矢印」までを横に並べる-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <!--「合計金額」から、「合計タンパク質」までを中央揃えにする-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-                    android:orientation="horizontal">
+                    android:background="@color/colorTotalContents">
 
-                    <!--「左矢印」の画像-->
-                    <ImageView
-                        android:id="@+id/calendar_last_month"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginRight="4dp"
-                        android:src="@drawable/ic_arrow_left" />
-
-                    <!--「前月」の文字列-->
-                    <TextView
+                    <!--「合計金額」から、「合計タンパク質」までを横に並べる-->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="60dp"
-                        android:text="@string/calender_last_month"
-                        android:textColor="@color/colorCalenderSelectMonth"
-                        android:textSize="18dp" />
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp">
 
-                    <!--「表示年月」の文字列-->
-                    <!--TODO "枠線用のxmlを作成する"-->
-                    <TextView
-                        android:id="@+id/titleText"
+                        <!--「合計金額」の画像-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_total_price" />
+
+                        <!--「合計金額」の文字列-->
+                        <TextView
+                            android:id="@+id/total_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="7dp"
+                            android:textAlignment="center"
+                            android:textSize="16dp" />
+
+                        <!--「合計本数」の画像-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/ic_total_bottle" />
+
+                        <!--「合計本数」の文字列-->
+                        <TextView
+                            android:id="@+id/total_bottle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="7dp"
+                            android:textAlignment="center"
+                            android:textSize="16dp" />
+
+                        <!--「合計タンパク質」の画像-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/ic_total_protein" />
+
+                        <!--「合計タンパク質」の文字列-->
+                        <TextView
+                            android:id="@+id/total_protein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="7dp"
+                            android:textAlignment="center"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--カレンダーの月を選択する-->
+                <!--「左矢印」から、「右矢印」までを中央揃えにする-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp">
+
+                    <!--「左矢印」から、「右矢印」までを横に並べる-->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="14dp"
-                        android:layout_marginRight="14dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
 
-                        android:textColor="@color/colorCalenderSelectMonth"
-                        android:textSize="18dp" />
+                        <!--「左矢印」の画像-->
+                        <ImageView
+                            android:id="@+id/calendar_last_month"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/ic_arrow_left" />
 
-                    <!--「次月」の文字列-->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="60dp"
-                        android:text="@string/calender_next_month"
-                        android:textColor="@color/colorCalenderSelectMonth"
-                        android:textSize="18dp" />
+                        <!--「前月」の文字列-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="60dp"
+                            android:text="@string/calender_last_month"
+                            android:textColor="@color/colorCalenderSelectMonth"
+                            android:textSize="18dp" />
 
-                    <!--「右矢印」の画像-->
-                    <ImageView
-                        android:id="@+id/calender_next_month"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="4dp"
-                        android:src="@drawable/ic_arrow_right" />
+                        <!--「表示年月」の文字列-->
+                        <TextView
+                            android:id="@+id/titleText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginRight="14dp"
+                            android:textColor="@color/colorCalenderSelectMonth"
+                            android:textSize="18dp" />
 
-                </LinearLayout>
+                        <!--「次月」の文字列-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:text="@string/calender_next_month"
+                            android:textColor="@color/colorCalenderSelectMonth"
+                            android:textSize="18dp" />
 
-            </RelativeLayout>
+                        <!--「右矢印」の画像-->
+                        <ImageView
+                            android:id="@+id/calender_next_month"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_marginLeft="4dp"
+                            android:src="@drawable/ic_arrow_right" />
 
-            <!--カレンダーのGridViewをFragmentとして挿入している-->
-            <include layout="@layout/fragment_calender" />
+                    </LinearLayout>
 
-        </LinearLayout>
+                </RelativeLayout>
+
+                <!--カレンダーのGridViewをFragmentとして挿入している-->
+                <include layout="@layout/fragment_calender" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <!--&lt;!&ndash;「グラフ集計」アイコンと、ボタンを中央揃えにする&ndash;&gt;-->
         <!--<RelativeLayout-->
@@ -218,10 +229,10 @@
             android:id="@+id/appear_select_protein"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:layout_alignBottom="@+id/excludeRadioButtonArea"
             android:background="@color/color_white"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_alignParentBottom="true">
 
             <!--「プロテインを〜」の文字列と、
                 「プロテイン種類」の画像を中央揃えにする-->
@@ -248,8 +259,6 @@
                     android:layout_centerInParent="true"
                     android:orientation="horizontal"
                     android:paddingTop="36dp">
-
-                    <!--TODO "calendarのタイポを修正する"-->
 
                     <!--「ココア」の画像-->
                     <ImageView
