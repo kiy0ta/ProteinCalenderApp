@@ -2,10 +2,12 @@ package com.kiyokiyo.proteincalenderapp.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,6 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.kiyokiyo.proteincalenderapp.R;
 import com.kiyokiyo.proteincalenderapp.constants.DefaultData;
 import com.kiyokiyo.proteincalenderapp.constants.ProteinType;
@@ -28,6 +36,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE;
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
 
 public class TopActivity extends AppCompatActivity {
@@ -45,6 +56,8 @@ public class TopActivity extends AppCompatActivity {
     ImageView mImageViewYogurt;
     Button mButtonOverCalendar;
     LinearLayout mLinearLayout;
+    private static final int MY_REQUEST_CODE = 1111;
+    private AppUpdateManager appUpdateManager;
 
     //カレンダーの月フォーマット型
     private static final String CLICKED_CALENDAR_FORMAT = "yyyy/MM/dd";
@@ -57,6 +70,49 @@ public class TopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Creates instance of the manager.
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+
+        // Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        /**
+         * log
+         */
+        Log.d("loglog", "バージョンチェックをします");
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            /**
+             * log
+             */
+            Log.d("loglog", "updateAvailability：" + appUpdateInfo.updateAvailability());
+
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                /**
+                 * log
+                 */
+                Log.d("loglog", "開始します：IMMEDIATE：" + appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE));
+                Log.d("loglog", "開始します：FLEXIBLE：" + appUpdateInfo.isUpdateTypeAllowed(FLEXIBLE));
+
+                // Request the update.
+                try {
+                    Log.d("loglog", "更新できるバージョンある");
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
+                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                            AppUpdateType.IMMEDIATE,
+                            // The current activity making the update request.
+                            this,
+                            // Include a request code to later monitor this update request.
+                            MY_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    Log.d("loglog", "onCreateでエラーがでています");
+                    e.printStackTrace();
+                }
+            }
+        });
 
         //メイン画面をセットする処理
         setContentView(R.layout.activity_main);
@@ -204,11 +260,11 @@ public class TopActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                for(ProteinEntity entity : entityList){
-                    if(entity.getProteinType() >= 0 ){
+                for (ProteinEntity entity : entityList) {
+                    if (entity.getProteinType() >= 0) {
                         Resources res = getResources();
                         //Dialogを呼び出す処理
-                        new AlertDialog.Builder(TopActivity.this,R.style.MyAlertDialogStyle)
+                        new AlertDialog.Builder(TopActivity.this, R.style.MyAlertDialogStyle)
                                 .setMessage(R.string.dialog_message)
                                 //閉じるボタン押下でダイアログを閉じる処理
                                 .setNegativeButton(res.getString(R.string.dialog_close_button), null)
@@ -220,7 +276,7 @@ public class TopActivity extends AppCompatActivity {
                                 })
                                 .show();
                         return;
-                }
+                    }
                 }
 
 
@@ -345,7 +401,45 @@ public class TopActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Log.i("update", "Update flow failed! Result code: " + resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        appUpdateManager
+                .getAppUpdateInfo()
+                .addOnSuccessListener(
+                        appUpdateInfo -> {
+                            Log.d("loglog", "アップデートが必要です");
+                            Log.d("loglog", "" + appUpdateInfo.updateAvailability());
+                            if (appUpdateInfo.updateAvailability()
+                                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                                Log.d("loglog", "アップデートが途中か判断します");
+                                // If an in-app update is already running, resume the update.
+                                try {
+                                    Log.d("loglog", "アップデートを再開します");
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            IMMEDIATE,
+                                            this,
+                                            MY_REQUEST_CODE);
+                                } catch (IntentSender.SendIntentException e) {
+                                    Log.d("loglog", "アップデート中にエラーが発生しました");
+                                    e.printStackTrace();
+                                }
+                            }
+                            Log.d("loglog", "ifをぬけました");
+                        });
+    }
 }
 
 
