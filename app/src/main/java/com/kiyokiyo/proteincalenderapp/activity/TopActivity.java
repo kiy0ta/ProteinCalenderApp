@@ -79,7 +79,7 @@ public class TopActivity extends AppCompatActivity {
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
         Log.d("loglog", "appUpdateInfo.updateAvailability():"+appUpdateInfo.updateAvailability());
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
+                   ) {
                 /**
                  * log
                  */
