@@ -37,7 +37,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE;
 import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
 
@@ -71,44 +70,30 @@ public class TopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Creates instance of the manager.
         appUpdateManager = AppUpdateManagerFactory.create(this);
-
-        // Returns an intent object that you use to check for an update.
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
         /**
          * log
          */
         Log.d("loglog", "バージョンチェックをします");
-
-        // Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            /**
-             * log
-             */
-            Log.d("loglog", "updateAvailability：" + appUpdateInfo.updateAvailability());
-
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
                 /**
                  * log
                  */
-                Log.d("loglog", "開始します：IMMEDIATE：" + appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE));
-                Log.d("loglog", "開始します：FLEXIBLE：" + appUpdateInfo.isUpdateTypeAllowed(FLEXIBLE));
-
-                // Request the update.
+                Log.d("loglog", "開始します");
                 try {
-                    Log.d("loglog", "更新できるバージョンある");
                     appUpdateManager.startUpdateFlowForResult(
-                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
                             appUpdateInfo,
-                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
                             AppUpdateType.IMMEDIATE,
-                            // The current activity making the update request.
                             this,
-                            // Include a request code to later monitor this update request.
                             MY_REQUEST_CODE);
+                    /**
+                     * log
+                     */
+                    Log.d("loglog", "アップデートが完了しました");
                 } catch (IntentSender.SendIntentException e) {
-                    Log.d("loglog", "onCreateでエラーがでています");
                     e.printStackTrace();
                 }
             }
@@ -423,21 +408,18 @@ public class TopActivity extends AppCompatActivity {
                             Log.d("loglog", "" + appUpdateInfo.updateAvailability());
                             if (appUpdateInfo.updateAvailability()
                                     == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                                Log.d("loglog", "アップデートが途中か判断します");
                                 // If an in-app update is already running, resume the update.
                                 try {
-                                    Log.d("loglog", "アップデートを再開します");
+                                    Log.d("loglog", "アップデートを開始します");
                                     appUpdateManager.startUpdateFlowForResult(
                                             appUpdateInfo,
                                             IMMEDIATE,
                                             this,
                                             MY_REQUEST_CODE);
                                 } catch (IntentSender.SendIntentException e) {
-                                    Log.d("loglog", "アップデート中にエラーが発生しました");
                                     e.printStackTrace();
                                 }
                             }
-                            Log.d("loglog", "ifをぬけました");
                         });
     }
 }
