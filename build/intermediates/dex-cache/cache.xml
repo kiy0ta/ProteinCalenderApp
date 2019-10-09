@@ -63,6 +63,16 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/kiyotatakeshi/ProteinCalenderApp/app/build/intermediates/transforms/desugar/release/35.jar"
+        jumboMode="false"
+        min-sdk-version="23"
+        optimize="true"
+        revision="28.0.3"
+        sha1="60d6a22a203c05a94f715eca89e66eb4f47034a7">
+        <dex dex="/Users/kiyotatakeshi/ProteinCalenderApp/app/build/intermediates/transforms/preDex/release/48.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/kiyotatakeshi/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/2e1b060dfda686bcd85a732397ff38b2/jars/classes.jar"
         jumboMode="false"
         min-sdk-version="23"
@@ -460,16 +470,6 @@
         revision="28.0.3"
         sha1="f77c6cfaee7ee7c8844d5340e47a38c3fdea7060">
         <dex dex="/Users/kiyotatakeshi/ProteinCalenderApp/app/build/intermediates/transforms/preDex/release/19.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/kiyotatakeshi/ProteinCalenderApp/app/build/intermediates/transforms/desugar/release/4.jar"
-        jumboMode="false"
-        min-sdk-version="23"
-        optimize="true"
-        revision="28.0.3"
-        sha1="2eb0b16a89413f62954566531458d1688ec3fa51">
-        <dex dex="/Users/kiyotatakeshi/ProteinCalenderApp/app/build/intermediates/transforms/preDex/release/47.jar" />
     </item>
     <item
         is-multidex="false"
