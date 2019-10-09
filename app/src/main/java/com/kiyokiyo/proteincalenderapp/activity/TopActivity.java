@@ -2,8 +2,12 @@ package com.kiyokiyo.proteincalenderapp.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.Task;
 import com.kiyokiyo.proteincalenderapp.R;
 import com.kiyokiyo.proteincalenderapp.constants.DefaultData;
 import com.kiyokiyo.proteincalenderapp.constants.ProteinType;
@@ -29,6 +27,13 @@ import com.kiyokiyo.proteincalenderapp.dao.ProteinCalendarDao;
 import com.kiyokiyo.proteincalenderapp.dto.ProteinEntity;
 import com.kiyokiyo.proteincalenderapp.adapter.CalendarGridAdapter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,9 +41,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
-
 
 public class TopActivity extends AppCompatActivity {
 
@@ -55,7 +57,10 @@ public class TopActivity extends AppCompatActivity {
     ImageView mImageViewYogurt;
     Button mButtonOverCalendar;
     LinearLayout mLinearLayout;
-
+    //アプリID 仮
+    private static final String APP_ID = "com.kiyokiyo.proteincalenderapp";
+    AlertDialog.Builder alertDialog;
+    String currentVersion;
 
     //カレンダーの月フォーマット型
     private static final String CLICKED_CALENDAR_FORMAT = "yyyy/MM/dd";
@@ -68,6 +73,30 @@ public class TopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //バージョンチェック
+        //アラートを出すのでここでnewしておく
+        alertDialog = new AlertDialog.Builder(this);
+
+        //現在インストールされているアプリのバージョンを調べる
+        PackageInfo packInfo = null;
+        try {
+            packInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), PackageManager.GET_ACTIVITIES);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        currentVersion = packInfo.versionName;
+        Log.d("loglog", "現在のアプリのバージョン：" + currentVersion);
+
+        //android queryを利用してmarketからアプリの情報を取得する
+        URL url = null;
+        try {
+            url = new URL("https://androidquery.appspot.com/api/market?app=" + APP_ID + "&locale=ja");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return;
+        }
+        new HttpGetTask().execute(url);
 
         //メイン画面をセットする処理
         setContentView(R.layout.activity_main);
@@ -358,6 +387,83 @@ public class TopActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
+    public class HttpGetTask extends AsyncTask<URL, Void, String> {
+        // HttpURLConnectionを使ったデータ取得 (バックグラウンド)
+        @Override
+        protected String doInBackground(URL... url) {
+            String result = "";
+            HttpURLConnection urlConnection = null;
+            try {
+                urlConnection = (HttpURLConnection) url[0].openConnection();
+                //IOUtils.toString()はString.valueOf()に置き換え
+                result = String.valueOf(urlConnection.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+            return result;
+        }
+
+        // データ取得結果
+        @Override
+        protected void onPostExecute(String response) {
+            try {
+                //keyがある時、最新バージョンとkeyを比べる。
+                JSONObject rootObject = new JSONObject(response);
+                String latestV = rootObject.getString("version");
+
+                Log.d("loglog", "ストアのバージョン：" + latestV);
+
+                SharedPreferences getpref = getSharedPreferences("pref", MODE_PRIVATE);
+                String appLatestVersion = getpref.getString("version", "");
+                SharedPreferences.Editor e = getpref.edit();
+
+                //　latestVが最新のversion
+                //　currentVersionが現在のversion
+                //　appLatestVersionがデータ保存しているversion
+                if (latestV.equals(currentVersion)) {
+                    //最新の時
+                } else {
+                    //最新が入っていない時
+                    if (latestV.equals(appLatestVersion)) {
+                        //最新バージョンとprefに保存しているバージョンが同じ時。バージョンアップのタイミングで１度通知を見ている。
+
+                    } else {
+                        //最新バージョンとprefに保存しているバージョンが違う時。
+                        //最新のバージョンをprefに保存する
+                        e.putString("version", latestV).commit();
+                        alertDialog.setTitle("お知らせ");
+                        alertDialog.setMessage("最新バージョンが入手可能です。アップデートしますか？");
+                        alertDialog.setPositiveButton("アップデート", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_VIEW);
+                                intent.setData(Uri.parse("market://details?id=" + APP_ID));
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+
+                            }
+                        });
+                        alertDialog.setNegativeButton("後で", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+
+                        // ダイアログの作成と表示
+                        alertDialog.create();
+                        alertDialog.show();
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
 
 
