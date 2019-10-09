@@ -69,8 +69,6 @@ public class TopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         //メイン画面をセットする処理
         setContentView(R.layout.activity_main);
         mDao = new ProteinCalendarDao(this);
@@ -236,7 +234,6 @@ public class TopActivity extends AppCompatActivity {
                     }
                 }
 
-
                 //「プロテイン選択バー」のVisibleをTrueにする処理
                 mLinearLayout = findViewById(R.id.appear_select_protein);
                 mLinearLayout.setVisibility(View.VISIBLE);
@@ -355,15 +352,11 @@ public class TopActivity extends AppCompatActivity {
         mTextViewForPrice.setText(sumPriceString + " 円");
         mTextViewForBottle.setText(sumBottleString + " 本");
         mTextViewForProtein.setText(sumProteinString + " g");
-
     }
-
-
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 }
 
