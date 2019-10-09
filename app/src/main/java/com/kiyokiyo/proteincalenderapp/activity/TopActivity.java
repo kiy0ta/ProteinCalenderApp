@@ -55,8 +55,7 @@ public class TopActivity extends AppCompatActivity {
     ImageView mImageViewYogurt;
     Button mButtonOverCalendar;
     LinearLayout mLinearLayout;
-    private static final int MY_REQUEST_CODE = 1111;
-    private AppUpdateManager appUpdateManager;
+
 
     //カレンダーの月フォーマット型
     private static final String CLICKED_CALENDAR_FORMAT = "yyyy/MM/dd";
@@ -70,34 +69,7 @@ public class TopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appUpdateManager = AppUpdateManagerFactory.create(this);
-        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-        /**
-         * log
-         */
-        Log.d("loglog", "バージョンチェックをします");
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
-                /**
-                 * log
-                 */
-                Log.d("loglog", "開始します");
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            AppUpdateType.IMMEDIATE,
-                            this,
-                            MY_REQUEST_CODE);
-                    /**
-                     * log
-                     */
-                    Log.d("loglog", "アップデートが完了しました");
-                } catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
 
         //メイン画面をセットする処理
         setContentView(R.layout.activity_main);
@@ -386,41 +358,12 @@ public class TopActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MY_REQUEST_CODE) {
-            if (resultCode != RESULT_OK) {
-                Log.i("update", "Update flow failed! Result code: " + resultCode);
-                // If the update is cancelled or fails,
-                // you can request to start the update again.
-            }
-        }
-    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        appUpdateManager
-                .getAppUpdateInfo()
-                .addOnSuccessListener(
-                        appUpdateInfo -> {
-                            Log.d("loglog", "アップデートが必要です");
-                            Log.d("loglog", "" + appUpdateInfo.updateAvailability());
-                            if (appUpdateInfo.updateAvailability()
-                                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                                // If an in-app update is already running, resume the update.
-                                try {
-                                    Log.d("loglog", "アップデートを開始します");
-                                    appUpdateManager.startUpdateFlowForResult(
-                                            appUpdateInfo,
-                                            IMMEDIATE,
-                                            this,
-                                            MY_REQUEST_CODE);
-                                } catch (IntentSender.SendIntentException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
+
     }
 }
 
