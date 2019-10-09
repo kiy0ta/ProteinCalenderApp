@@ -110,7 +110,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="__local_aars__:/Users/kiyotatakeshi/ProteinCalenderApp/app/libs/commons-lang3-3.8.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="android.arch.core:runtime-1.1.1" level="project" />
-    <orderEntry type="library" name="com.google.android.play:core-1.6.3" level="project" />
+    <orderEntry type="library" name="com.google.android.play:core-1.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
     <orderEntry type="library" name="com.android.support:asynclayoutinflater-28.0.0" level="project" />
     <orderEntry type="library" name="com.android.support:viewpager-28.0.0" level="project" />
